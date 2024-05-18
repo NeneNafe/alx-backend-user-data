@@ -67,3 +67,20 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
         user=os.getenv("PERSONAL_DATA_DB_USERNAME", "localhost"),
         password=os.getenv("PERSONAL_DATA_DB_PASSWORD", ""),
     )
+
+
+def main():
+    """ the main function """
+    cnnctr = get_db()
+    users = cnnctr.cursor()
+    users.execute("SELECT CONTACT('name=', name, ';ssn=', ssn, ';ip=', ip, \
+        ';user_agent', user_agent, ';') AS message FROM users;")
+    formatter = RedactingFormatter(fields=PII_FIELDS)
+    logger = get_logger()
+
+    for user in users:
+        logger.log(logging.INFO, user[0])
+
+
+if __name__ == "__main__":
+    main()
