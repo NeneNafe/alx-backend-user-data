@@ -5,6 +5,10 @@
 from typing import List
 import re
 import logging
+import csv
+import os
+
+PII_FIELDS = ("name", "email", "phone", "ssn", "password")
 
 
 class RedactingFormatter(logging.Formatter):
@@ -39,3 +43,16 @@ def filter_datum(fields: List[str], redaction: str, message: str,
     return re.sub(r"(\w+)=([a-zA-Z0-9@\.\-\(\)\ \:\^\<\>\~\$\%\@\?\!\/]*)",
                   lambda match: match.group(1) + "=" + redaction
                   if match.group(1) in fields else match.group(0), message)
+
+
+def get_logger() -> logging.Logger:
+    """ returns a logging.Logger object """
+    logger = logging.getLogger("user_data")
+    logger.setLevel(logging.INFO)
+    logger.propagate = False
+
+    stream_handler = logging.StreamHandler()
+    stream_handler.setFormatter(RedactingFormatter(PII_FIELDS))
+    logger.addHandler(stream_handler)
+
+    return logger
