@@ -45,7 +45,7 @@ def before_request():
     """ has all the path to the bad requests
     """
     paths = ['/api/v1/status/', '/api/v1/unauthorized/',
-            '/api/v1/forbidden/']
+             '/api/v1/forbidden/']
     if not auth:
         return None
     if not auth.require_auth(request.path, paths):
