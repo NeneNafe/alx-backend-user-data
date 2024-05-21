@@ -53,7 +53,8 @@ class BasicAuth(Auth):
         to_extract = decoded_base64_authorization_header.split(':', 1)
         return (to_extract[0], to_extract[1]) if to_extract else (None, None)
 
-    def user_object_from_credentials(self, user_email: str, user_pwd: str
+    def user_object_from_credentials(self,
+                                     user_email: str, user_pwd: str
                                      ) -> TypeVar('User'):
         """ returns the User instance based on his email and password """
         if not user_email or not isinstance(user_email, str)\
