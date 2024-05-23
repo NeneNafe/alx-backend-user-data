@@ -8,7 +8,6 @@ from models.user import User
 from os import getenv
 
 
-
 @app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
 def login():
     """ POST method to return based on email """
@@ -21,9 +20,9 @@ def login():
     try:
         users = User.search({'email': email})
     except Exception:
-        return jsonify({"error": "no user found for this email" })
+        return jsonify({"error": "no user found for this email"})
     if not users:
-        return jsonify({"error": "no user found for this email" })
+        return jsonify({"error": "no user found for this email"})
     for user in users:
         if not user.is_valid_password(password):
             return jsonify({"error": "wrong password"}), 401
