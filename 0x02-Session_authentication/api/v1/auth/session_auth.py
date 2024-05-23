@@ -6,10 +6,10 @@ import uuid
 from models.user import User
 
 
-class SessionAuth(Auth):
+class SessionAuth (Auth):
     """ Inherits from Auth """
     user_id_by_session_id = {}
-    
+
     def create_session(self, user_id: str = None) -> str:
         """" creates a Session ID for a user_id """
         if isinstance(user_id, str):
