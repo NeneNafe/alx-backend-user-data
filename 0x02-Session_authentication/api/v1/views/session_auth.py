@@ -30,6 +30,6 @@ def login():
         from api.v1.app import auth
         session_id = auth.create_session(user.id)
         output = jsonify(user.to_json())
-        output.set_cookies(getenv('SESSION_NAME'), session_id)
+        output.set_cookie(getenv('SESSION_NAME'), session_id)
         return output
     return jsonify({"error": "no user found for this email"})
