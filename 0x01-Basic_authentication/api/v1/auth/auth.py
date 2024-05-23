@@ -19,7 +19,9 @@ class Auth:
             if p.endswith('*'):
                 if path.startswith(p[:1]):
                     return False
-        return False if path in excluded_paths else True
+            elif p == path:
+                return False
+        return True
 
     def authorization_header(self, request=None) -> str:
         """ Returns None """
