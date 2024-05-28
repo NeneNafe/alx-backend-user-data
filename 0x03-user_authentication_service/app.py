@@ -14,6 +14,7 @@ def index() -> str:
     """ The flask function """
     return jsonify({"message": "Bienvenue"})
 
+
 @app.route('/users', methods=['POST'])
 def to_register_user():
     """ register a new user """
