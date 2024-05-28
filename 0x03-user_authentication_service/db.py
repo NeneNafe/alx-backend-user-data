@@ -4,7 +4,6 @@
 
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.ext import InvalidRequestError
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.orm.session import Session
@@ -37,8 +36,7 @@ class DB:
     def add_user(self, email: str, hashed_password: str) -> User:
         """  has two required string arguments: email and
         hashed_password, and returns a User """
-        if not email or not hashed_password:
-            return
+
         user = User(email=email, hashed_password=hashed_password)
         session = self._session
         session.add(user)
