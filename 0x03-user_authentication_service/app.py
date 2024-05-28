@@ -6,8 +6,8 @@ from flask import Flask, josnify
 app = Flask(__name__)
 
 
-@app.route("/", methods=["GET"])
-def home() -> str:
+@app.route('/', methods=['GET'])
+def index() -> str:
     """ The flask function """
     return josnify({"message": "Bienvenue"})
 
