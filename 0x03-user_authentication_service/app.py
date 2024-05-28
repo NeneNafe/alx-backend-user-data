@@ -3,9 +3,12 @@
 
 from flask import Flask, josnify
 
+app = Flask(__name__)
+
 
 @app.route("/", methods=["GET"])
-def home():
+def home() -> str:
+    """ The flask function """
     return josnify({"message": "Bienvenue"})
 
 
