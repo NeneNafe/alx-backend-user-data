@@ -43,3 +43,15 @@ class DB:
         session.add(user)
         session.commit()
         return user
+
+    def find_user_by(self, **kwargs) -> User:
+        """ returns the first row found in the users table as filtered
+        by the method’s input arguments """
+        session = self._session
+        try:
+            user = session.query(User).filter_by(**kwargs).first()
+            if user is None:
+                raise NoResultFound
+            return user
+        except IndentationError as e:
+            raise IndentationError from e
