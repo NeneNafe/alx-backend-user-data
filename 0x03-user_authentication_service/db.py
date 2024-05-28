@@ -55,3 +55,16 @@ class DB:
             return user
         except IndentationError as e:
             raise IndentationError from e
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        """ takes as argument a required user_id integer and arbitrary
+        keyword arguments, and returns None """
+        session = self._session
+
+        user = self.find_user_by(id=user_id)
+        for key, value in kwargs.items():
+            if not hasattr(user, key):
+                raise ValueError
+            setattr(user, key, value)
+        session.commit()
+        return None
