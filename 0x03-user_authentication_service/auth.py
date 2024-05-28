@@ -59,7 +59,7 @@ class Auth:
 
     def get_user_from_session_id(self, session_id: str) -> User:
         """ Finds the user by session ID """
-        
+
         if session_id is None:
             return None
         try:
